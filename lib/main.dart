@@ -33,6 +33,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   String? weatherCity;
   double? temperature;
   String? weatherDescription;
+  String? weatherIcon;
   String? errorMessage;
 
   Future<void> searchWeather() async {
@@ -49,6 +50,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
       weatherCity = null;
       temperature = null;
       weatherDescription = null;
+      weatherIcon = null;
     });
 
     try {
@@ -57,6 +59,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
       final currentTemperature = (weatherData['main']['temp'] as num)
           .toDouble();
       final description = weatherData['weather'][0]['description'] as String;
+      final icon = weatherData['weather'][0]['icon'] as String;
 
       // The screen may have closed while the request was running.
       if (!mounted) return;
@@ -65,6 +68,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
         weatherCity = name;
         temperature = currentTemperature;
         weatherDescription = description;
+        weatherIcon = icon;
       });
     } catch (error) {
       if (!mounted) return;
@@ -134,6 +138,19 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     Text(
                       weatherCity!,
                       style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    Image.network(
+                      'https://openweathermap.org/payload/api/media/file/$weatherIcon@2x.png',
+                      width: 100,
+                      height: 100,
+                      semanticLabel: weatherDescription,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Center(child: Text('Image unavailable')),
+                        );
+                      },
                     ),
                     const SizedBox(height: 16),
                     Text(
