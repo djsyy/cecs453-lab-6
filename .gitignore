@@ -12,6 +12,9 @@
 .swiftpm/
 migrate_working_dir/
 
+# Local API configuration
+.env
+
 # IntelliJ related
 *.iml
 *.ipr
