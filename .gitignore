@@ -15,6 +15,9 @@ migrate_working_dir/
 # Local API configuration
 .env
 
+# Local verification tests
+/test/
+
 # IntelliJ related
 *.iml
 *.ipr
