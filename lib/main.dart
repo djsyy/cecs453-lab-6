@@ -140,7 +140,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     Image.network(
-                      'https://openweathermap.org/payload/api/media/file/$weatherIcon@2x.png',
+                      'https://openweathermap.org/img/wn/$weatherIcon@2x.png',
                       width: 100,
                       height: 100,
                       semanticLabel: weatherDescription,
